@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link href="/registro-animal" className="text-white hover:underline hover:text-green-500">
+            <Link href="/registro-animal" className="text-white hover:underline hover:text-green-500" passHref>
               Registro de Animales
             </Link>
           </li>
