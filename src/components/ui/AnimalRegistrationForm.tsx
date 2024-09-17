@@ -8,9 +8,9 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form"; // Asegúrate de tener estos componentes importados desde donde los hayas creado
+} from "@/components/ui/form"; 
 
-// Define el tipo de datos del formulario
+
 type AnimalFormValues = {
   nombre: string;
   especie: string;
@@ -20,7 +20,7 @@ type AnimalFormValues = {
   fechaRegistro: string;
 };
 
-// Aquí es donde definimos el componente del formulario para el registro de animales
+
 const AnimalRegistrationForm = () => {
   const methods = useForm<AnimalFormValues>({
     defaultValues: {
@@ -33,12 +33,12 @@ const AnimalRegistrationForm = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      {/* Cabecera de la Card */}
+    
       <div className="bg-[#0a2324] text-white text-center py-4">
         <h2 className="text-2xl font-bold">Registro de Animales</h2>
       </div>
 
-      {/* Contenido de la Card */}
+      
       <div className="p-6">
         <Form {...methods}>
           <form className="space-y-4">
@@ -59,12 +59,12 @@ const AnimalRegistrationForm = () => {
             </FormItem>
 
             <FormItem>
-              <FormLabel htmlFor="especie" className="text-[#153a3c]">Especie</FormLabel>
+              <FormLabel htmlFor="especie" className="text-[#153a3c]">ID de la Especie</FormLabel>
               <FormControl>
                 <input
                   id="especie"
                   type="text"
-                  placeholder="Ingrese la especie del animal"
+                  placeholder="Ingrese el id de la especie del animal"
                   {...methods.register("especie", {
                     required: "La especie es requerida",
                   })}

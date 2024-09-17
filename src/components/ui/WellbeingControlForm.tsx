@@ -4,7 +4,6 @@ import * as React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 
-// Define el tipo de datos del formulario
 type WellbeingControlFormValues = {
   animalId: string;
   estadoSalud: string;
@@ -27,12 +26,11 @@ const WellbeingControlForm: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      {/* Cabecera de la Card */}
       <div className="bg-[#0a2324] text-white text-center py-4">
         <h2 className="text-2xl font-bold">Control de Bienestar Animal</h2>
       </div>
 
-      {/* Contenido de la Card */}
+    
       <div className="p-6">
         <FormProvider {...methods}>
           <form className="space-y-4">
