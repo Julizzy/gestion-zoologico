@@ -1,4 +1,4 @@
-// src/components/ui/Background.tsx
+
 import { ReactNode } from "react";
 
 interface BackgroundProps {
@@ -13,7 +13,7 @@ const Background = ({ children }: BackgroundProps) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         width: "100%",
-        height: "150vh", // Esto asegura que el fondo ocupe toda la pantalla
+        height: "150vh", 
       }}
     >
       {children}
