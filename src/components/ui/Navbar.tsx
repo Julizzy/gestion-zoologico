@@ -17,12 +17,12 @@ const Navbar: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link href="/control-bienestar" className="text-white hover:underline hover:text-green-500">
+            <Link href="/control-bienestar" className="text-white hover:underline hover:text-green-500" passHref>
               Control de Bienestar
             </Link>
           </li>
           <li>
-            <Link href="/panel-revisiones" className="text-white hover:underline hover:text-green-500">
+            <Link href="/panel-revisiones" className="text-white hover:underline hover:text-green-500" passHref>
               Panel de Revisiones
             </Link>
           </li>
