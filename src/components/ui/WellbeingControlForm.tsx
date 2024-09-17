@@ -10,10 +10,10 @@ type WellbeingControlFormValues = {
   estadoSalud: string;
   alimentacion: string;
   observaciones: string;
-  fechaControl: string; // Fecha del control de bienestar
+  fechaControl: string; 
 };
 
-// Componente del formulario para el registro de control de bienestar
+
 const WellbeingControlForm: React.FC = () => {
   const methods = useForm<WellbeingControlFormValues>({
     defaultValues: {
@@ -82,11 +82,11 @@ const WellbeingControlForm: React.FC = () => {
             </FormItem>
 
             <FormItem>
-              <FormLabel htmlFor="observaciones" className="text-[#153a3c]">Observaciones</FormLabel>
+              <FormLabel htmlFor="observaciones" className="text-[#153a3c]">Observaciones de comportamiento</FormLabel>
               <FormControl>
                 <textarea
                   id="observaciones"
-                  placeholder="Observaciones adicionales"
+                  placeholder="Describa el comportamiento del animal"
                   {...methods.register("observaciones")}
                   className="border border-[#153a3c] p-2 rounded w-full"
                 />
