@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {  FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 
 type WellbeingControlFormValues = {
   animalId: string;
