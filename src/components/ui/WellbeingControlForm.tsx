@@ -27,7 +27,7 @@ const WellbeingControlForm: React.FC = () => {
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="bg-[#0a2324] text-white text-center py-4">
-        <h2 className="text-2xl font-bold">Control de Bienestar Animal</h2>
+        <h2 className="text-2xl font-bold">Control Médico de Animal</h2>
       </div>
 
     
@@ -105,7 +105,7 @@ const WellbeingControlForm: React.FC = () => {
             </FormItem>
 
             <button type="submit" className="bg-[#0a2324] text-white p-2 rounded w-full">
-              Registrar Control de Bienestar
+              Registrar Control Médico 
             </button>
           </form>
         </FormProvider>
