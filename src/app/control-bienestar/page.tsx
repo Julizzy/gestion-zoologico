@@ -29,7 +29,7 @@ export default function ControlBienestarPage() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage className="text-[#5894bc]">
-                Control de Bienestar</BreadcrumbPage>
+                Control Médico</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
