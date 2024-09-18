@@ -1,7 +1,6 @@
 "use client";
 import Header from "@/components/ui/Header";
 import Background from "@/components/ui/Background";
-import { Button } from "@/components/ui/Button";
 import Navbar from "@/components/ui/Navbar";
 import CarouselWithImages from "@/components/ui/CarouselWithImages";
 
