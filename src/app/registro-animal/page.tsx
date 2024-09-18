@@ -1,4 +1,3 @@
-
 "use client";
 
 import Header from "@/components/ui/Header";
@@ -13,6 +12,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/Button"; // Importar el botón si tienes el componente
 
 export default function RegistroAnimalPage() {
   return (
@@ -24,22 +24,31 @@ export default function RegistroAnimalPage() {
           <Breadcrumb className="ml-[-15rem]">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/"className="text-[#638495] hover:text-[#638495]">
-                Inicio</BreadcrumbLink>
+                <BreadcrumbLink href="/" className="text-[#638495] hover:text-[#638495]">
+                  Inicio
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage className="text-[#5894bc]">
-                Control de Bienestar</BreadcrumbPage>
+                  Control de Bienestar
+                </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-        <main className="flex flex-col items-center justify-center min-h-screen">
-          <div className="w-full max-w-4xl mt-8">
-            <AnimalRegistrationForm />
-          </div>
-        </main>
-      </div>
+          <main className="flex flex-col items-center justify-center min-h-screen">
+            <div className="w-full max-w-4xl mt-8">
+              <AnimalRegistrationForm />
+            </div>
+            <div className="mt-6">
+              <Button
+                className="w-full py-3 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+              >
+                Mostrar información
+              </Button>
+            </div>
+          </main>
+        </div>
       </div>
     </Background>
   );
