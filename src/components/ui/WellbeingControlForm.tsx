@@ -54,7 +54,7 @@ const WellbeingControlForm: React.FC = () => {
     
       <div className="p-6">
         <FormProvider {...methods}>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={methods.handleSubmit(onSubmit)}>
             <FormItem>
               <FormLabel htmlFor="animalId" className="text-[#153a3c]">ID del Animal</FormLabel>
               <FormControl>
