@@ -12,28 +12,28 @@ import {
 
 type AnimalFormValues = {
   nombre: string;
-  especieId: string; // Cambiamos especie a especieId para el ID
+  especieId: string; 
   edad: number;
 };
 
 const AnimalRegistrationForm = () => {
-  const [species, setSpecies] = React.useState<{ id: string; nombre: string }[]>([]); // Guarda la lista de especies
+  const [species, setSpecies] = React.useState<{ id: string; nombre: string }[]>([]); 
 
   const methods = useForm<AnimalFormValues>({
     defaultValues: {
       nombre: "",
-      especieId: "", // Especie será el ID
+      especieId: "", 
       edad: 0,
     },
   });
 
-  // Obtener los IDs de las especies al cargar el componente
+ 
   React.useEffect(() => {
     const fetchSpecies = async () => {
       try {
-        const response = await fetch("http://localhost:8080/especies"); // URL donde obtienes la lista de especies
+        const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/"); 
         const data = await response.json();
-        setSpecies(data); // Guarda las especies en el estado
+        setSpecies(data); 
       } catch (error) {
         console.error("Error al obtener las especies", error);
       }
@@ -44,7 +44,7 @@ const AnimalRegistrationForm = () => {
 
   const onSubmit = async (data: AnimalFormValues) => {
     try {
-      const response = await fetch("http://localhost:8080/animal", {
+      const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

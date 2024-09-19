@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-// Define el tipo de datos del formulario
 type EspecieFormValues = {
   nombre: string;
 };
@@ -22,23 +21,23 @@ const EspecieRegistrationForm = () => {
     },
   });
 
-  // Método que se ejecuta cuando el formulario es enviado
+ 
   const onSubmit = async (data: EspecieFormValues) => {
     try {
-      // Hacemos la solicitud POST directamente desde el componente
-      const response = await fetch("http://localhost:8080/especie", {
+     
+      const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data), // Enviar el cuerpo como un string JSON
+        body: JSON.stringify(data), 
       });
 
-      // Verificar si la respuesta es correcta
+      
       if (response.ok) {
         alert("Especie registrada exitosamente");
       } else {
-        // Manejar errores de respuesta
+       
         const errorData = await response.json();
         alert(`Error: ${errorData.message || "Hubo un problema al registrar la especie"}`);
       }
@@ -50,14 +49,14 @@ const EspecieRegistrationForm = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      {/* Cabecera de la Card */}
+     
       <div className="bg-[#0a2324] text-white text-center py-4">
         <h2 className="text-2xl font-bold">Registrar Especie</h2>
       </div>
 
-      {/* Contenido de la Card */}
+     
       <div className="p-6">
-        {/* Llamamos al `handleSubmit` del hook de formulario para manejar el envío */}
+        
         <Form {...methods}>
           <form className="space-y-4" onSubmit={methods.handleSubmit(onSubmit)}>
             <FormItem>
