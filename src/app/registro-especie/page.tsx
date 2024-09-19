@@ -12,6 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+    Breadcrumb,
+    BreadcrumbList,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbSeparator,
+    BreadcrumbPage,
+  } from "@/components/ui/breadcrumb";
 
 interface Especie {
   id: number;
@@ -51,6 +59,20 @@ export default function RegistroEspeciePage() {
         <Header />
         <Navbar />
         <div className="max-w-3xl mx-auto py-10">
+        <div className="max-w-3xl mx-auto">
+          <Breadcrumb className="ml-[-15rem]">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/"className="text-[#638495] hover:text-[#638495]">
+                Inicio</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-[#5894bc]">
+                Panel de Revisiones</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           <main className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-2xl font-bold mb-6">Registrar Especie</h1>
             {isLoading ? (
@@ -75,8 +97,10 @@ export default function RegistroEspeciePage() {
                 </TableBody>
               </Table>
             )}
+    
           </main>
         </div>
+      </div>
       </div>
     </Background>
   );
