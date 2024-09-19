@@ -85,7 +85,7 @@ export default function RegistroAnimalPage() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage className="text-[#5894bc]">
-                  Control de Bienestar
+                 Registro de animales
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>

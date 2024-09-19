@@ -69,7 +69,7 @@ export default function RegistroEspeciePage() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage className="text-[#5894bc]">
-                Panel de Revisiones</BreadcrumbPage>
+                Registro de especies</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
