@@ -24,6 +24,27 @@ const WellbeingControlForm: React.FC = () => {
     },
   });
 
+  const onSubmit = async (data: WellbeingControlFormValues) => {
+    try {
+      const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/registro-medico", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("Registro guardado exitosamente");
+      } else {
+        alert("Hubo un error al guardar el registro");
+      }
+    } catch (error) {
+      console.error("Error al guardar el registro", error);
+      alert("Hubo un error al guardar el registro");
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="bg-[#0a2324] text-white text-center py-4">

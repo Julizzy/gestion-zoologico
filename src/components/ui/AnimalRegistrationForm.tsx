@@ -44,7 +44,7 @@ const AnimalRegistrationForm = () => {
 
   const onSubmit = async (data: AnimalFormValues) => {
     try {
-      const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/", {
+      const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/animal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
