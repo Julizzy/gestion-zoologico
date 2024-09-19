@@ -9,17 +9,13 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { createAnimal } from "@/services/apiService"; // Importamos el servicio de API para crear un animal
+import { createAnimal } from "@/services/apiService"; 
 
-// Define el tipo de datos del formulario
 type AnimalFormValues = {
   nombre: string;
   especie: string;
   edad: number;
-  dieta: string;
-  comportamiento: string;
-  fechaRegistro: string;
-};
+}
 
 const AnimalRegistrationForm = () => {
   const methods = useForm<AnimalFormValues>({
@@ -27,16 +23,14 @@ const AnimalRegistrationForm = () => {
       nombre: "",
       especie: "",
       edad: 0,
-      dieta: "",
-      comportamiento: "",
-      fechaRegistro: "",
+     
     },
   });
 
-  // Método que se ejecuta cuando el formulario es enviado
+
   const onSubmit = async (data: AnimalFormValues) => {
     try {
-      // Llamamos a la función `createAnimal` para enviar los datos al backend
+     
       const response = await createAnimal(data);
       console.log("Animal registrado exitosamente", response);
       alert("Animal registrado exitosamente");
@@ -48,14 +42,14 @@ const AnimalRegistrationForm = () => {
 
   return (
       <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Cabecera de la Card */}
+       
         <div className="bg-[#0a2324] text-white text-center py-4">
           <h2 className="text-2xl font-bold">Registro de Animales</h2>
         </div>
 
-        {/* Contenido de la Card */}
+       
         <div className="p-6">
-          {/* Llamamos al `handleSubmit` del hook de formulario para manejar el envío */}
+        
           <Form {...methods}>
             <form className="space-y-4" onSubmit={methods.handleSubmit(onSubmit)}>
               <FormItem>
@@ -113,7 +107,7 @@ const AnimalRegistrationForm = () => {
                 <FormMessage />
               </FormItem>
 
-              {/* Puedes agregar más campos según sea necesario */}
+             
 
               <button
                   type="submit"
