@@ -1,5 +1,6 @@
-import React from "react";
-import { FutureReviewPanelForm } from "@/components/ui/FutureReviewPanelForm";
+"use client";
+import React, { useEffect, useState } from "react";
+import  FutureReviewPanelForm  from "@/components/ui/FutureReviewPanelForm";
 import Header from "@/components/ui/Header";
 import Background from "@/components/ui/Background";
 import Navbar from "@/components/ui/Navbar";
@@ -12,7 +13,46 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 
+type WellbeingControlFormValues = {
+  animalId: string;
+  estadoSalud: string;
+  alimentacion: string;
+  observaciones: string;
+  fechaControl: string; 
+};
+
+
 const FutureReviewPanelPage = () => {
+  const [forms, setForms] = useState<WellbeingControlFormValues[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
+    const formattedYearMonth = `${year}-${month}`;
+
+    const fetchAnimalsToCheck = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/registros-medicos/animales-sin-revision/fecha/${formattedYearMonth}`); 
+        if (!response.ok) {
+          throw new Error('Failed to fetch animals');
+        }
+        const data = await response.json();
+        setForms(data);
+      } catch (err) {
+        setError('Error fetching animals. Please try again later.');
+        console.error('Error fetching animals:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAnimalsToCheck();
+  }, []);
+  
   return (
     <Background>
       <div className="relative w-full h-100"></div>
