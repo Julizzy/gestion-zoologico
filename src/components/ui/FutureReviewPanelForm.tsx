@@ -1,82 +1,81 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
+interface Animal {
+  animalID: string
+  Especie: string
+  Nombre: string
+}
 
-type Animal = {
-  id: number;
-  nombre: string;
-  ultimaRevision: string;
-};
-
-
-const animales: Animal[] = [
-  { id: 1, nombre: "León", ultimaRevision: "2024-08-15" },
-  { id: 2, nombre: "Elefante", ultimaRevision: "2024-09-05" },
-  { id: 3, nombre: "Tigre", ultimaRevision: "2024-08-20" },
-  { id: 4, nombre: "Jirafa", ultimaRevision: "2024-09-01" },
-];
-
-
-const esRevisionPendiente = (ultimaRevision: string) => {
-  const fechaRevision = new Date(ultimaRevision);
-  const fechaActual = new Date();
-
-  
-  return (
-    fechaRevision.getFullYear() !== fechaActual.getFullYear() ||
-    fechaRevision.getMonth() !== fechaActual.getMonth()
-  );
-};
-
-
-const FutureReviewPanelForm: React.FC = () => {
-  const [pendientes, setPendientes] = useState<Animal[]>([]);
+export default function FutureReviewPanelForm() {
+  const [animals, setAnimals] = useState<Animal[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    
-    const animalesPendientes = animales.filter((animal) =>
-      esRevisionPendiente(animal.ultimaRevision)
-    );
-    setPendientes(animalesPendientes);
-  }, []);
+    const fetchAnimals = async () => {
+      try {
+        // Get current date and format it as yyyy,mm
+        const currentDate = new Date()
+        const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`
+        console.log(formattedDate)
+
+        // Fetch all animal IDs with the current date as a path variable
+        const idsResponse = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/registros-medicos/animales-sin-revision/fecha/${formattedDate}`)
+        if (!idsResponse.ok) throw new Error('Failed to fetch animal IDs')
+        const ids: string[] = await idsResponse.json()
+
+        // Fetch details for each animal
+        const animalDetails = await Promise.all(
+          ids.map(async (id) => {
+            const detailResponse = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/animales/{id}`)
+            if (!detailResponse.ok) throw new Error(`Failed to fetch details for animal ${id}`)
+            const detail = await detailResponse.json()
+            return {
+              animalID: id,
+              Especie: detail.especie.nombre,
+              Nombre: detail.nombre
+            }
+          })
+        )
+
+        setAnimals(animalDetails)
+        setLoading(false)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred')
+        setLoading(false)
+      }
+    }
+
+    fetchAnimals()
+  }, [])
+
+  if (loading) return <div className="text-center p-4">Loading...</div>
+  if (error) return <div className="text-center p-4 text-red-500">Error: {error}</div>
 
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="bg-[#0a2324] text-white text-center py-4">
-        <h2 className="text-2xl font-bold">Animales Pendientes de Revisión</h2>
-      </div>
-
-     
-      <div className="p-6">
-        {pendientes.length > 0 ? (
-          <table className="w-full table-auto">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 text-left text-[#153a3c]">ID</th>
-                <th className="px-4 py-2 text-left text-[#153a3c]">Especie</th>
-                <th className="px-4 py-2 text-left text-[#153a3c]">Nombre</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pendientes.map((animal) => (
-                <tr key={animal.id}>
-                  <td className="border px-4 py-2">{animal.id}</td>
-                  <td className="border px-4 py-2">{animal.nombre}</td>
-                  <td className="border px-4 py-2">{animal.ultimaRevision}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p className="text-center text-[#153a3c]">
-            Todos los animales han sido revisados este mes.
-          </p>
-        )}
-      </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Animales Pendientes de Revisión</h1>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Animal ID</TableHead>
+            <TableHead>Especie</TableHead>
+            <TableHead>Nombre</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {animals.map((animal) => (
+            <TableRow key={animal.animalID}>
+              <TableCell>{animal.animalID}</TableCell>
+              <TableCell>{animal.Especie}</TableCell>
+              <TableCell>{animal.Nombre}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
-  );
-};
-
-export { FutureReviewPanelForm };
+  )
+}
