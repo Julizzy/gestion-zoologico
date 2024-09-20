@@ -57,7 +57,6 @@ const FutureReviewPanelForm: React.FC = () => {
                 <th className="px-4 py-2 text-left text-[#153a3c]">ID</th>
                 <th className="px-4 py-2 text-left text-[#153a3c]">Especie</th>
                 <th className="px-4 py-2 text-left text-[#153a3c]">Nombre</th>
-                <th className="px-4 py-2 text-left text-[#153a3c]">Última Revisión</th>
               </tr>
             </thead>
             <tbody>
