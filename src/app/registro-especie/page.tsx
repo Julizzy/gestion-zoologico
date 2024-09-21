@@ -20,6 +20,7 @@ import {
     BreadcrumbSeparator,
     BreadcrumbPage,
   } from "@/components/ui/breadcrumb";
+import { EspecieRegistrationForm } from "@/components/ui/EspecieRegistrarionForm";
 
 interface Especie {
   id: number;
@@ -74,29 +75,7 @@ export default function RegistroEspeciePage() {
             </BreadcrumbList>
           </Breadcrumb>
           <main className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="text-2xl font-bold mb-6">Registrar Especie</h1>
-            {isLoading ? (
-              <p>Cargando...</p>
-            ) : error ? (
-              <p className="text-red-500">{error}</p>
-            ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>ID</TableHead>
-                    <TableHead>Nombre</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {species.map((especie) => (
-                    <TableRow key={especie.id}>
-                      <TableCell>{especie.id}</TableCell>
-                      <TableCell>{especie.nombre}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            )}
+           <EspecieRegistrationForm/>
     
           </main>
         </div>
