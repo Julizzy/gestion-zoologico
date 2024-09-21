@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 
 type AnimalFormValues = {
   id: string;
-  especie: string;
+  especie_id: string;
   nombre: string;
   edad: number;
 };
@@ -27,18 +27,18 @@ const AnimalRegistrationForm = () => {
   const methods = useForm<AnimalFormValues>({
     defaultValues: {
       id: "",
-      especie: "",
+      especie_id: "",
       nombre: "",
       edad: 0,
     },
   });
 
-  const { register, handleSubmit, setValue, watch } = methods;
+  const { register, handleSubmit, setValue, watch, clearErrors } = methods;
 
   React.useEffect(() => {
     const fetchSpecies = async () => {
       try {
-        const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/");
+        const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/especies");
         const data = await response.json();
         setSpecies(data);
       } catch (error) {
@@ -63,14 +63,17 @@ const AnimalRegistrationForm = () => {
 
   const fetchAnimal = async (id: string) => {
     try {
-      const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/animal/${id}`);
+      const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/animales/${id}`);
       if (response.ok) {
         const data = await response.json();
-        setValue('especie', data.especie);
+        setValue('especie_id', data.especie.id);
         setValue('nombre', data.nombre);
         setValue('edad', data.edad);
       } else {
         console.error('Animal not found');
+        setValue('especie_id', "");
+        setValue('nombre', "");
+        setValue('edad', 0);
       }
     } catch (error) {
       console.error('Error fetching animal', error);
@@ -78,6 +81,7 @@ const AnimalRegistrationForm = () => {
   };
 
   const onSubmit = async (data: AnimalFormValues) => {
+    console.log("Form submitted with data:", data);
     const url = action === "crear"
       ? "https://fast-tensor-435818-j0.rj.r.appspot.com/animal"
       : `https://fast-tensor-435818-j0.rj.r.appspot.com/animal/${data.id}`;
@@ -95,7 +99,9 @@ const AnimalRegistrationForm = () => {
       if (response.ok) {
         alert(`Animal ${action === "crear" ? "registrado" : "actualizado"} exitosamente`);
       } else {
-        alert(`Hubo un error al ${action === "crear" ? "registrar" : "actualizar"} el animal`);
+        const errorData = await response.json();
+        console.error("Server response:", errorData);
+        alert(`Hubo un error al ${action === "crear" ? "registrar" : "actualizar"} el animal: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
       console.error(`Error al ${action === "crear" ? "registrar" : "actualizar"} el animal`, error);
@@ -111,7 +117,7 @@ const AnimalRegistrationForm = () => {
     }
 
     try {
-      const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/animal/${id}`, {
+      const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/animales/${id}`, {
         method: 'DELETE',
       });
 
@@ -124,6 +130,14 @@ const AnimalRegistrationForm = () => {
     } catch (error) {
       console.error('Error al eliminar el animal', error);
       alert('Hubo un error al eliminar el animal');
+    }
+  };
+
+  const handleActionChange = (value: "crear" | "actualizar") => {
+    setAction(value);
+    if (value === "crear") {
+      setValue("id", "");
+      clearErrors("id");
     }
   };
 
@@ -143,7 +157,9 @@ const AnimalRegistrationForm = () => {
                   id="id"
                   type="text"
                   placeholder="Ingrese el ID del animal"
-                  {...register("id", { required: "El id es requerido" })}
+                  {...register("id", { 
+                    required: action === "actualizar" ? "El id es requerido" : false 
+                  })}
                   disabled={action === "crear"}
                   className="border border-[#153a3c] p-2 rounded w-full text-[#0a2324]"
                 />
@@ -156,7 +172,7 @@ const AnimalRegistrationForm = () => {
               <FormControl>
                 <select
                   id="especie"
-                  {...register("especie", { required: "La especie es requerida" })}
+                  {...register("especie_id", { required: "La especie es requerida" })}
                   className="border border-[#153a3c] p-2 rounded w-full text-[#0a2324]"
                 >
                   <option value="">Seleccione una especie</option>
@@ -203,7 +219,7 @@ const AnimalRegistrationForm = () => {
 
             <RadioGroup 
               defaultValue="crear" 
-              onValueChange={(value) => setAction(value as "crear" | "actualizar")} 
+              onValueChange={handleActionChange}
               className="flex space-x-4 mb-4"
             >
               <div className="flex items-center space-x-2">
