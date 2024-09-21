@@ -59,7 +59,7 @@ const EspecieRegistrationForm = () => {
 
     const onSubmit = async (data: EspecieFormValues) => {
         const url = action === "crear"
-            ? "https://fast-tensor-435818-j0.rj.r.appspot.com/especies"
+            ? "https://fast-tensor-435818-j0.rj.r.appspot.com/especie"
             : `https://fast-tensor-435818-j0.rj.r.appspot.com/especies/${data.id}`;
         const method = action === "crear" ? "POST" : "PUT";
 
