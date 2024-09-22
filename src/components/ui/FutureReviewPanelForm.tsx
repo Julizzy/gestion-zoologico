@@ -14,8 +14,8 @@ interface FutureReviewPanelFormProps {
   forms: WellbeingControlFormValues[];
 }
 
-export default function FutureReviewPanelForm({ forms }: FutureReviewPanelFormProps) {
-  // Aquí puedes usar la prop `forms` según lo necesites
+export default function FutureReviewPanelForm({ }: FutureReviewPanelFormProps) {
+ 
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

@@ -27,11 +27,8 @@ const FutureReviewPanelPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
-    const formattedYearMonth = `${year}-${month}`;
-
+   
+  
     const fetchAnimalsToCheck = async () => {
       setIsLoading(true);
       setError(null);
