@@ -21,6 +21,9 @@ import {
     BreadcrumbPage,
   } from "@/components/ui/breadcrumb";
 import { EspecieRegistrationForm } from "@/components/ui/EspecieRegistrarionForm";
+import { Button } from "@/components/ui/Button";
+import { DialogHeader } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 
 interface Especie {
   id: number;
@@ -31,7 +34,8 @@ export default function RegistroEspeciePage() {
   const [species, setSpecies] = useState<Especie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const toggleDialog = () => setIsDialogOpen(!isDialogOpen);
   useEffect(() => {
     const fetchSpecies = async () => {
       setIsLoading(true);
@@ -75,7 +79,48 @@ export default function RegistroEspeciePage() {
             </BreadcrumbList>
           </Breadcrumb>
           <main className="flex flex-col items-center justify-center min-h-screen">
-           <EspecieRegistrationForm/>
+           <div className="w-full max-w-4xl mt-8">
+              <EspecieRegistrationForm />
+            </div>
+           <div className="mt-6">
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    className="w-full py-3 bg-[#638495] text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+                    onClick={toggleDialog}
+                  >
+                    Mostrar información
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[800px]">
+                  <DialogHeader>
+                    <DialogTitle>Información de especies</DialogTitle>
+                  </DialogHeader>
+                  {isLoading ? (
+                    <p>Cargando...</p>
+                  ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                  ) : (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>ID</TableHead>
+                          <TableHead>Nombre Especie</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {species.map((especie) => (
+                          <TableRow key={especie.id}>
+                            <TableCell>{especie.id}</TableCell>
+                            <TableCell>{especie.nombre}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  )}
+                </DialogContent>
+              </Dialog>
+            </div>
     
           </main>
         </div>

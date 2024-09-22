@@ -44,7 +44,6 @@ export default function RegistroAnimalPage() {
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const toggleDialog = () => setIsDialogOpen(!isDialogOpen);
 
   useEffect(() => {

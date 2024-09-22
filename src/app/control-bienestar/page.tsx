@@ -2,7 +2,7 @@
 import Header from "@/components/ui/Header";
 import Background from "@/components/ui/Background";
 import Navbar from "@/components/ui/Navbar";
-import {WellbeingControlForm} from "@/components/ui/WellbeingControlForm"; 
+import WellbeingControlForm from "@/components/ui/WellbeingControlForm"; 
 import {
   Breadcrumb,
   BreadcrumbList,
