@@ -1,16 +1,21 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+"use client";
+import { useState, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { WellbeingControlFormValues } from '@/app/panel-revisiones/page';
 
 interface Animal {
-  animalID: string
-  Especie: string
-  Nombre: string
+  animalID: string;
+  Especie: string;
+  Nombre: string;
 }
 
-export default function FutureReviewPanelForm() {
+interface FutureReviewPanelFormProps {
+  forms: WellbeingControlFormValues[];
+}
+
+export default function FutureReviewPanelForm({ forms }: FutureReviewPanelFormProps) {
+  // Aquí puedes usar la prop `forms` según lo necesites
   const [animals, setAnimals] = useState<Animal[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -53,8 +58,8 @@ export default function FutureReviewPanelForm() {
 
   return (
     <Card className="border-0 w-full">
-      <CardHeader  className="bg-[#0a2324] text-white text-center py-4">
-        <CardTitle className= "text-2xl font-bold">Animales Pendientes de Revisión</CardTitle>
+      <CardHeader className="bg-[#0a2324] text-white text-center py-4">
+        <CardTitle className="text-2xl font-bold">Animales Pendientes de Revisión</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -77,5 +82,5 @@ export default function FutureReviewPanelForm() {
         </Table>
       </CardContent>
     </Card>
-  )
+  );
 }
