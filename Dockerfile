@@ -4,30 +4,32 @@ FROM node:22 AS build
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos necesarios para instalar las dependencias
+# Copia los archivos necesarios para instalar dependencias
 COPY package*.json ./
 
-
+# Instala las dependencias de producción
 RUN npm install
 
-
+# Copia el resto de los archivos del proyecto
 COPY . .
 
-
+# Construye el proyecto Next.js
 RUN npm run build
 
+# Instala dependencias de producción (limpiando las de desarrollo)
+RUN npm install --production
 
-FROM nginx:stable-alpine
+# Etapa 2: Servidor de producción
+FROM node:22
 
+# Establece el directorio de trabajo
+WORKDIR /app
 
-COPY --from=build /app/build /usr/share/nginx/html
+# Copia los archivos necesarios desde la etapa de construcción
+COPY --from=build /app ./
 
-# Copia un archivo de configuración personalizado (opcional)
-# Si necesitas personalizar Nginx, descomenta y asegúrate de tener un archivo nginx.conf
-# COPY nginx.conf /etc/nginx/nginx.conf
+# Exponer el puerto que Next.js usa por defecto
+EXPOSE 3000
 
-# Exponer el puerto que usará Nginx
-EXPOSE 80
-
-# Comando por defecto para iniciar Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para iniciar el servidor de Next.js
+CMD ["npm", "start"]
