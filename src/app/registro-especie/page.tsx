@@ -20,7 +20,7 @@ import {
     BreadcrumbSeparator,
     BreadcrumbPage,
   } from "@/components/ui/breadcrumb";
-import { EspecieRegistrationForm } from "@/components/ui/EspecieRegistrarionForm";
+import { EspecieRegistrationForm } from "@/components/ui/EspecieRegistrationForm";
 import { Button } from "@/components/ui/Button";
 import { DialogHeader } from "@/components/ui/dialog";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@radix-ui/react-dialog";

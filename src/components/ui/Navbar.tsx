@@ -31,6 +31,11 @@ const Navbar: React.FC = () => {
               Panel de Revisiones
             </Link>
           </li>
+          <li>
+            <Link href="/registro-cuidador" className="text-white hover:underline hover:text-green-500" passHref>
+              Registro de cuidador
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
