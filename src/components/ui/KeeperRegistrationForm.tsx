@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 type KeeperFormValues = {
     id: string;
     nombre: string;
-    especialidad: string;
+    correo: string;
 };
 
 const KeeperRegistrationForm: React.FC = () => {
@@ -27,7 +27,7 @@ const KeeperRegistrationForm: React.FC = () => {
         defaultValues: {
             id: "",
             nombre: "",
-            especialidad: "",
+            correo: "",
         },
     });
 
@@ -49,15 +49,15 @@ const KeeperRegistrationForm: React.FC = () => {
     // Función para obtener datos de un cuidador por ID
     const fetchKeeper = async (id: string) => {
         try {
-            const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/keepers/${id}`);
+            const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/cuidador/${id}`);
             if (response.ok) {
                 const data = await response.json();
                 setValue("nombre", data.nombre);
-                setValue("especialidad", data.especialidad);
+                setValue("correo", data.correo);
             } else {
                 console.error("Cuidador no encontrado");
                 setValue("nombre", "");
-                setValue("especialidad", "");
+                setValue("correo", "");
             }
         } catch (error) {
             console.error("Error al obtener el cuidador", error);
@@ -67,8 +67,8 @@ const KeeperRegistrationForm: React.FC = () => {
     // Función para manejar el envío del formulario
     const onSubmit = async (data: KeeperFormValues) => {
         const url = action === "crear"
-            ? "https://fast-tensor-435818-j0.rj.r.appspot.com/keepers"
-            : `https://fast-tensor-435818-j0.rj.r.appspot.com/keepers/${data.id}`;
+            ? "https://fast-tensor-435818-j0.rj.r.appspot.com/cuidador"
+            : `https://fast-tensor-435818-j0.rj.r.appspot.com/cuidador/${data.id}`;
         const method = action === "crear" ? "POST" : "PUT";
 
         try {
@@ -102,7 +102,7 @@ const KeeperRegistrationForm: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/keepers/${id}`, {
+            const response = await fetch(`https://fast-tensor-435818-j0.rj.r.appspot.com/cuidador/${id}`, {
                 method: "DELETE",
             });
 
@@ -168,13 +168,13 @@ const KeeperRegistrationForm: React.FC = () => {
                         </FormItem>
 
                         <FormItem>
-                            <FormLabel htmlFor="especialidad" className="text-[#0a2324] font-semibold">Especialidad</FormLabel>
+                            <FormLabel htmlFor="correo" className="text-[#0a2324] font-semibold">Correo</FormLabel>
                             <FormControl>
                                 <input
-                                    id="especialidad"
+                                    id="correo"
                                     type="text"
-                                    placeholder="Ingrese la especialidad del cuidador"
-                                    {...register("especialidad", { required: "La especialidad es requerida" })}
+                                    placeholder="Ingrese el correo del cuidador"
+                                    {...register("correo", { required: "El correo es requerido" })}
                                     className="border border-[#153a3c] p-2 rounded w-full text-[#0a2324]"
                                 />
                             </FormControl>
