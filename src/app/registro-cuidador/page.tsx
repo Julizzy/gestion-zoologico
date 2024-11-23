@@ -28,7 +28,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@radix-ui/rea
 interface Cuidador {
   id: number;
   nombre: string;
-  especialidad: string;
+  correo: string;
 }
 
 export default function RegistroCuidadorPage() {
@@ -43,7 +43,7 @@ export default function RegistroCuidadorPage() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/keepers"); // Cambia la URL por tu endpoint real
+        const response = await fetch("https://fast-tensor-435818-j0.rj.r.appspot.com/cuidador"); // Cambia la URL por tu endpoint real
         if (!response.ok) {
           throw new Error("Failed to fetch keepers");
         }
@@ -113,7 +113,7 @@ export default function RegistroCuidadorPage() {
                           <TableRow>
                             <TableHead>ID</TableHead>
                             <TableHead>Nombre Cuidador</TableHead>
-                            <TableHead>Especialidad</TableHead>
+                            <TableHead>Correo</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -121,7 +121,7 @@ export default function RegistroCuidadorPage() {
                             <TableRow key={cuidador.id}>
                               <TableCell>{cuidador.id}</TableCell>
                               <TableCell>{cuidador.nombre}</TableCell>
-                              <TableCell>{cuidador.especialidad}</TableCell>
+                              <TableCell>{cuidador.correo}</TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
